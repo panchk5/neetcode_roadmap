@@ -1,0 +1,19 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # hash map
+        maps = {}
+        for num in nums:
+            maps[num] = 1 + maps.get(num , 0)
+        #bucket sort
+        frequency = []
+        for i in range(len(nums)+1):
+            frequency.append([])
+        for a,b in maps.items():
+            frequency[b].append(a)
+        result = []
+        for j in range(len(frequency)-1, 0 , -1):
+            for n in frequency[j]:
+                result.append(n)
+                if len(result) == k:
+                    return result
+            
